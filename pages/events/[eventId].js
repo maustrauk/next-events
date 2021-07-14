@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { useRouter } from "next/router";
 
-import Footer from "../../components/footer";
 import { getEventById } from "../../dummy-data";
 import EventSummary from "../../components/events/event-detail/event-summary";
 import EventLogistics from "../../components/events/event-detail/event-logistics";
@@ -28,7 +27,6 @@ const EventDetailPage = () => {
             <EventContent>
                 <p>{event.description}</p>
             </EventContent>
-            <Footer/>
         </Fragment>
     )
 }
