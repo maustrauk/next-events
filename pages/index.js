@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import styles from '../styles/Home.module.css';
-import Footer from '../components/Footer';
+import Footer from '../components/footer';
 
 import { getFeaturedEvents } from '../dummy-data';
 import EventList from '../components/events/event-list';
