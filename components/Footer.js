@@ -14,6 +14,13 @@ const Footer = () => {
               <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
             </span>
           </a>
+          <a
+            href="https://maustrauk.github.io/portfolio/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Made by Iaroslav Mokroguz
+          </a>
         </footer>
     )
   }
