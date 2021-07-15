@@ -15,6 +15,6 @@ export default function Home(props) {
 }
 
 
-export async function getStaticProps() {
-  return dataToProps();
+export async function getStaticProps(context) {
+  return dataToProps(context);
 }
