@@ -1,7 +1,7 @@
 import { getFeaturedEvents } from '../dummy-data';
 import EventList from '../components/events/event-list';
 import { Fragment } from 'react';
-import dataToProps from '../utils/dataToProps';
+import { AlldataToProps } from '../utils/dataToProps';
 
 export default function Home(props) {
 
@@ -15,6 +15,6 @@ export default function Home(props) {
 }
 
 
-export async function getStaticProps(context) {
-  return dataToProps(context);
+export async function getStaticProps() {
+  return AlldataToProps();
 }

@@ -6,6 +6,7 @@ import EventSummary from "../../components/events/event-detail/event-summary";
 import EventLogistics from "../../components/events/event-detail/event-logistics";
 import EventContent from "../../components/events/event-detail/event-content";
 import ErrorAlert from "../../components/ui/error-alert";
+import { dataToPropsById } from "../../utils/dataToProps";
 
 const EventDetailPage = () => {
     const router = useRouter();
@@ -39,3 +40,7 @@ const EventDetailPage = () => {
 }
 
 export default EventDetailPage;
+
+export async function getStaticProps(context) {
+    return dataToPropsById(context);
+  }
