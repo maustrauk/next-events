@@ -4,7 +4,7 @@ import EventList from "../../components/events/event-list";
 import ResultsTitle from "../../components/events/results-title";
 import Button from "../../components/ui/button";
 import ErrorAlert from "../../components/ui/error-alert";
-import { getFilteredEvents } from "../../dummy-data";
+import { getFilteredEvents, DUMMY_EVENTS } from "../../dummy-data";
 
 const FilteredEventsPage = () => {
     const router = useRouter();
@@ -39,7 +39,7 @@ const FilteredEventsPage = () => {
     const filteredEvents = getFilteredEvents({
         year: numYear,
         month: numMonth,
-    });
+    }, DUMMY_EVENTS);
 
     if (!filteredEvents || filteredEvents.length === 0) {
         return (

@@ -1,15 +1,14 @@
-import styles from '../styles/Home.module.css';
-
-import { getFeaturedEvents } from '../dummy-data';
+import { getFeaturedEvents, DUMMY_EVENTS } from '../dummy-data';
 import EventList from '../components/events/event-list';
+import { Fragment } from 'react';
 
 export default function Home() {
 
-  const featuredEvents = getFeaturedEvents();
+  const featuredEvents = getFeaturedEvents(DUMMY_EVENTS);
 
   return (
-    <div className={styles.container}>
+    <Fragment>
       <EventList items={featuredEvents}/>
-    </div>
+    </Fragment>
   )
 }
