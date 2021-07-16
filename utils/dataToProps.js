@@ -56,6 +56,10 @@ export async function dataToPropsById(context) {
 
     const loadedEvent = data.events.find(e => e.id === eventId);
 
+    if (!loadedEvent) {
+        return { notFound: true}
+    }
+
     return {
         props: {
             loadedEvent: loadedEvent,
@@ -66,12 +70,12 @@ export async function dataToPropsById(context) {
 
 export async function propsPath() {
     const data = await getData();
-    const ids = data.events.map(e => e.id);
 
+    const ids = data.events.map(e => e.id);
     const params = ids.map(id => ({params: {eventId: id}}));
     
     return {
         paths: params,
-        fallback: false,
+        fallback: true,
     }
 }
