@@ -1,8 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-async function getData() {
-    const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
+async function getData(folderName, fileName) {
+    const filePath = path.join(process.cwd(), folderName, fileName);
     const jsonData = await fs.readFile(filePath);
 
     return JSON.parse(jsonData);
@@ -27,7 +27,7 @@ function dataValidation(data) {
 }
 
 export async function AlldataToProps() {
-    const data = await getData();
+    const data = await getData('data', 'dummy-backend.json');
     const dataValidator = dataValidation(data);
 
     if(Object.keys(dataValidator).length !== 0) {
@@ -46,7 +46,7 @@ export async function dataToPropsById(context) {
     const { params } = context;
     const eventId = params.eventId;
 
-    const data = await getData();
+    const data = await getData('data', 'dummy-backend.json');
 
     const dataValidator = dataValidation(data);
 
@@ -69,7 +69,7 @@ export async function dataToPropsById(context) {
 }
 
 export async function propsPath() {
-    const data = await getData();
+    const data = await getData('data', 'dummy-backend.json');
 
     const ids = data.events.map(e => e.id);
     const params = ids.map(id => ({params: {eventId: id}}));
