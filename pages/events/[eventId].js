@@ -4,12 +4,13 @@ import EventSummary from "../../components/events/event-detail/event-summary";
 import EventLogistics from "../../components/events/event-detail/event-logistics";
 import EventContent from "../../components/events/event-detail/event-content";
 import ErrorAlert from "../../components/ui/error-alert";
-import { dataToPropsById } from "../../utils/dataToProps";
+import { dataToPropsById, propsPath } from "../../utils/dataToProps";
 
 const EventDetailPage = (params) => {
-    const event = params.loadedEvent;
+    const { loadedEvent } = params;
 
-    if (!event) {
+
+    if (!loadedEvent) {
         return (
             <Fragment>
                 <ErrorAlert>
@@ -21,14 +22,14 @@ const EventDetailPage = (params) => {
 
     return (
         <Fragment>
-            <EventSummary title={event.title}/>
+            <EventSummary title={loadedEvent.title}/>
             <EventLogistics
-                date={event.date}
-                address={event.location}
-                image={event.image}
-                imageAlt={event.title}/>
+                date={loadedEvent.date}
+                address={loadedEvent.location}
+                image={loadedEvent.image}
+                imageAlt={loadedEvent.title}/>
             <EventContent>
-                <p>{event.description}</p>
+                <p>{loadedEvent.description}</p>
             </EventContent>
         </Fragment>
     )
@@ -41,12 +42,5 @@ export async function getStaticProps(context) {
   }
 
 export async function getStaticPaths() {
-    return {
-        paths: [
-            { params: { eventId: 'e1' } },
-            { params: { eventId: 'e2' } },
-            { params: { eventId: 'e3' } },
-        ],
-        fallback: false,
-    }
+    return propsPath();
 }
