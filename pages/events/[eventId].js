@@ -4,13 +4,13 @@ import EventSummary from "../../components/events/event-detail/event-summary";
 import EventLogistics from "../../components/events/event-detail/event-logistics";
 import EventContent from "../../components/events/event-detail/event-content";
 import ErrorAlert from "../../components/ui/error-alert";
-import { dataToPropsById, propsPath } from "../../utils/dataToProps";
+import { getEventById, getAllEvents } from "../../helpers/api-util";
 
-const EventDetailPage = (params) => {
-    const { loadedEvent } = params;
+const EventDetailPage = (props) => {
+    const event = props.selectedEvent;
 
 
-    if (!loadedEvent) {
+    if (!event) {
         return (
             <Fragment>
                 <ErrorAlert>
@@ -22,14 +22,14 @@ const EventDetailPage = (params) => {
 
     return (
         <Fragment>
-            <EventSummary title={loadedEvent.title}/>
+            <EventSummary title={event.title}/>
             <EventLogistics
-                date={loadedEvent.date}
-                address={loadedEvent.location}
-                image={loadedEvent.image}
-                imageAlt={loadedEvent.title}/>
+                date={event.date}
+                address={event.location}
+                image={event.image}
+                imageAlt={event.title}/>
             <EventContent>
-                <p>{loadedEvent.description}</p>
+                <p>{event.description}</p>
             </EventContent>
         </Fragment>
     )
@@ -38,9 +38,20 @@ const EventDetailPage = (params) => {
 export default EventDetailPage;
 
 export async function getStaticProps(context) {
-    return dataToPropsById(context);
+    const eventId = context.params.eventId;
+    const event = await getEventById(eventId);
+    return {
+        props: {
+            selectedEvent: event
+        }
+    };
   }
 
 export async function getStaticPaths() {
-    return propsPath();
+    const events = await getAllEvents();
+    const paths = events.map(event => ({params: {eventId: event.id}}));
+    return {
+        paths: paths,
+        fallback: false
+    };
 }
