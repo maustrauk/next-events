@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 import EventList from "../../components/events/event-list";
@@ -9,19 +10,11 @@ import { getFilteredEvents } from "../../helpers/api-util";
 const FilteredEventsPage = (props) => {
     const router = useRouter();
 
-    // const filterData = router.query.slug;
+     const filterData = router.query.slug;
 
-    // if (!filterData) {
-    //     return <p className='center'>Loading</p>
-    // }
-
-    // const filteredYear = filterData[0];
-    // const filteredMonth = filterData[1];
-
-    // const numYear = +filteredYear;
-    // const numMonth = +filteredMonth;
-
-    // const badInput = isNaN(numYear) || isNaN(numMonth) || numYear > 2030 || numYear < 2021 || numMonth <= 0 || numMonth > 12;
+     if (!filterData) {
+         return <p className='center'>Loading</p>
+     }
 
     if (props.hasError) {
         return (
@@ -55,6 +48,10 @@ const FilteredEventsPage = (props) => {
 
     return (
         <Fragment>
+            <Head>
+                <title>Filtered Events</title>
+                <meta name="description" content={`All events for ${props.date.month}/${props.date.year}.`}/>
+            </Head>
             <ResultsTitle date={date}/>
             <EventList items={filteredEvents}/>
         </Fragment>
